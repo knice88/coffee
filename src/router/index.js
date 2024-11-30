@@ -7,7 +7,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: Home
+      component: Coffee
     },
     {
       path: '/views',

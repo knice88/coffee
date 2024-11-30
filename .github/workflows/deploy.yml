@@ -24,8 +24,14 @@ jobs:
     - name: Build project
       run: npm run build
 
+    - name: Setup Git user
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist # 打包后的文件目录
+        force_orphan: true # 使用独立分支，不考虑历史记录

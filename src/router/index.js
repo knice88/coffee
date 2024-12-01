@@ -1,13 +1,13 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Coffee from '@/components/coffee/Main.vue'
-import Home from '@/components/Home.vue'
+import Translate from '@/components/translate/Main.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     {
       path: '/',
-      component: Coffee
+      redirect: '/views/translate'
     },
     {
       path: '/views',
@@ -15,6 +15,10 @@ const router = createRouter({
         {
           path: 'coffee',
           component: Coffee
+        },
+        {
+          path: 'translate',
+          component: Translate
         }
       ]
     }

@@ -33,9 +33,45 @@ const handleInputLang = (lang) => {
     inputLang.value = lang
 }
 
+const moreInputlang = ref({
+    code: 'es', name: 'Spanish'
+})
+
+const handleMoreInputLang = (item) => {
+    moreInputlang.value = item
+    inputLang.value = item.code
+    // 选择后关掉更多语言选项
+    showMoreLang.value = false
+}
+
 const handleOutputLang = (lang) => {
     outputLang.value = lang
 }
+
+const moreOutputlang = ref({
+    code: 'es', name: 'Spanish'
+})
+
+const handleMoreOutputLang = (item) => {
+    moreOutputlang.value = item
+    outputLang.value = item.code
+    // 选择后关掉更多语言选项
+    showMoreLangOut.value = false
+}
+
+const moreLangs = [
+    { code: 'es', name: 'Spanish' },
+    { code: 'zh', name: 'Chinese' },
+    { code: 'ru', name: 'Russian' },
+    { code: 'de', name: 'German' },
+    { code: 'it', name: 'Italian' },
+    { code: 'ja', name: 'Japanese' },
+    { code: 'ko', name: 'Korean' },
+    { code: 'pt', name: 'Portuguese' },
+]
+
+const showMoreLang = ref(false)
+const showMoreLangOut = ref(false)
 
 </script>
 
@@ -54,9 +90,17 @@ const handleOutputLang = (lang) => {
                             @click="handleInputLang('en')">English</div>
                         <div class="header-item header-btn" :class="{ 'btn-active': inputLang === 'fr' }"
                             @click="handleInputLang('fr')">French</div>
-                        <div class="header-item header-btn btn-more" :class="{ 'btn-active': inputLang === 'es' }"
-                            @click="handleInputLang('es')">
-                            Spanish<img src="@/assets/translate/Expand_down.svg" /></div> <!-- todo 增加更多语言 -->
+                        <div class="header-item header-btn btn-more"
+                            :class="{ 'btn-active': inputLang === moreInputlang.code }"
+                            @click="showMoreLang = !showMoreLang" @mouseleave="showMoreLang = false">
+                            <span v-if="!showMoreLang">{{ moreInputlang.name }}</span>
+                            <div v-if="showMoreLang">
+                                <div class="more-option" v-for="item in moreLangs" :key="item.code"
+                                    @click.stop="handleMoreInputLang(item)">
+                                    {{ item.name }}</div>
+                            </div>
+                            <img v-if="!showMoreLang" src="@/assets/translate/Expand_down.svg" />
+                        </div>
                     </div>
                     <div class="input-area">
                         <textarea cols="30" rows="10" class="input-box-content" :maxlength="inputLimit"
@@ -83,9 +127,17 @@ const handleOutputLang = (lang) => {
                             @click="handleOutputLang('en')">English</div>
                         <div class="header-item header-btn" :class="{ 'btn-active': outputLang === 'fr' }"
                             @click="handleOutputLang('fr')">French</div>
-                        <div class="header-item header-btn btn-more" :class="{ 'btn-active': outputLang === 'es' }"
-                            @click="handleOutputLang('es')">
-                            Spanish<img src="@/assets/translate/Expand_down.svg" /></div><!-- todo 增加更多语言 -->
+                        <div class="header-item header-btn btn-more"
+                            :class="{ 'btn-active': outputLang === moreOutputlang.code }"
+                            @click="showMoreLangOut = !showMoreLangOut" @mouseleave="showMoreLangOut = false">
+                            <span v-if="!showMoreLangOut">{{ moreOutputlang.name }}</span>
+                            <div v-if="showMoreLangOut">
+                                <div class="more-option" v-for="item in moreLangs" :key="item.code"
+                                    @click.stop="handleMoreOutputLang(item)">
+                                    {{ item.name }}</div>
+                            </div>
+                            <img v-if="!showMoreLangOut" src="@/assets/translate/Expand_down.svg" />
+                        </div>
                     </div>
                     <div class="input-area">
                         <textarea cols="30" rows="10" class="input-box-content" maxlength="500" readonly
@@ -131,6 +183,16 @@ const handleOutputLang = (lang) => {
     border: #7CA9F3 solid 1px;
 }
 
+/* 点击选择之后，鼠标还是悬浮在按钮上， 又一次触发悬浮事件，导致选择框不消失*/
+
+.btn-item:hover {
+    cursor: pointer;
+}
+
+.more-option {
+    padding: 5px 0;
+}
+
 .img-btn {
     width: 30px;
     border: #4D5562 solid 3px;
@@ -164,8 +226,17 @@ const handleOutputLang = (lang) => {
     line-height: 30px;
 }
 
+.btn-more>span {
+    vertical-align: middle;
+}
+
 .btn-more>img {
     vertical-align: middle;
+}
+
+.btn-more {
+    z-index: 1500;
+    position: relative;
 }
 
 .header-btn {

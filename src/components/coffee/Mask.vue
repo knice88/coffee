@@ -97,7 +97,7 @@ const filteredList = computed(() => {
 }
 
 .describe-area {
-    background-image: url('@/assets/vector.svg');
+    background-image: url('@/assets/coffee/vector.svg');
     background-repeat: no-repeat;
     background-position: top right;
     display: flex;

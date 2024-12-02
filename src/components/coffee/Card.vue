@@ -18,13 +18,13 @@ defineProps({
             <span class="price">{{ item.price }}</span>
         </div>
         <div class="rating-and-votes" v-if="item.rating > 0">
-            <img src="@/assets/Star_fill.svg">
+            <img src="@/assets/coffee/Star_fill.svg">
             {{ item.rating }}
             <span class="votes">({{ item.votes }} votes)</span>
             <span class="sold-out-tag">{{ item.available ? '' : 'Sold out' }}</span>
         </div>
         <div class="rating-and-votes" v-else>
-            <img src="@/assets/Star.svg">
+            <img src="@/assets/coffee/Star.svg">
             <span class="votes">No ratings</span>
             <span class="sold-out-tag">{{ item.available ? '' : 'Sold out' }}</span>
         </div>

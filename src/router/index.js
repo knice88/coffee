@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import Home from '@/components/Home.vue'
 import Coffee from '@/components/coffee/Main.vue'
 import Translate from '@/components/translate/Main.vue'
 
@@ -7,7 +8,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: '/views/translate'
+      component: Home
     },
     {
       path: '/views',

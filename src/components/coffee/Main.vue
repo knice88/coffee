@@ -14,7 +14,7 @@ import Mask from './Mask.vue'
   background-color: #111315;
   width: 100%;
   min-height: 100vh;
-  background-image: url('@/assets/bg-cafe.jpg');
+  background-image: url('@/assets/coffee/bg-cafe.jpg');
   background-repeat: no-repeat;
   /* 不重复图片 */
   background-position: top;

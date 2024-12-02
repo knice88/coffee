@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '@/components/Home.vue'
 import Coffee from '@/components/coffee/Main.vue'
 import Translate from '@/components/translate/Main.vue'
+import Country from '@/components/country/Main.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -20,6 +21,10 @@ const router = createRouter({
         {
           path: 'translate',
           component: Translate
+        },
+        {
+          path: 'country',
+          component: Country
         }
       ]
     }

@@ -7,13 +7,16 @@ import Card from './Card.vue'
         <div class="page">
             <div class="title">本站用于完成 <a class="title-link"
                     href="https://devchallenges.io/">https://devchallenges.io/</a>
-                的任务, <a class="title-link" href="https://github.com/knice88/coffee">点此查看源码</a>, 目前实现以下功能:</div>
+                的任务, <a class="title-link" href="https://github.com/knice88/coffee">点此查看源码</a>, 目前实现以下页面:</div>
             <div class="cards">
                 <Card @click="$router.push('/views/coffee')" title="Coffee">
                     <img src="@/assets/coffee.png" class="trumb-img">
                 </Card>
                 <Card @click="$router.push('/views/translate')" title="Translate">
                     <img src="@/assets/translate.png" class="trumb-img">
+                </Card>
+                <Card @click="$router.push('/views/country')" title="Country">
+                    <img src="@/assets/translate.png" class="trumb-img"> <!-- todo 占位，完成后再修改 -->
                 </Card>
             </div>
         </div>

@@ -1,24 +1,18 @@
 <script setup>
-import { useRouter } from 'vue-router'
 import Card from './Card.vue'
-
-const router = useRouter()
-const jumpToPage = (path) => {
-    router.push(path)
-}
-
 </script>
 
 <template>
     <div class="home">
         <div class="page">
-            <div class="title">本站用于完成 <a class="title-link" href="https://devchallenges.io/">https://devchallenges.io/</a>
+            <div class="title">本站用于完成 <a class="title-link"
+                    href="https://devchallenges.io/">https://devchallenges.io/</a>
                 的任务, <a class="title-link" href="https://github.com/knice88/coffee">点此查看源码</a>, 目前实现以下功能:</div>
             <div class="cards">
-                <Card @click="jumpToPage('/views/coffee')" title="Coffee">
+                <Card @click="$router.push('/views/coffee')" title="Coffee">
                     <img src="@/assets/coffee.png" class="trumb-img">
                 </Card>
-                <Card @click="jumpToPage('/views/translate')" title="Translate">
+                <Card @click="$router.push('/views/translate')" title="Translate">
                     <img src="@/assets/translate.png" class="trumb-img">
                 </Card>
             </div>
@@ -27,7 +21,6 @@ const jumpToPage = (path) => {
 </template>
 
 <style scoped>
-
 .cards {
     width: 90%;
     display: grid;
@@ -35,6 +28,7 @@ const jumpToPage = (path) => {
     grid-row-gap: 20px;
     grid-column-gap: 20px;
     justify-items: center;
+    margin-bottom: 10px;
 }
 
 .title-link {
@@ -50,6 +44,7 @@ const jumpToPage = (path) => {
 
 .trumb-img {
     width: 100%;
+    border-radius: 10px;
 }
 
 .home {
@@ -64,7 +59,6 @@ const jumpToPage = (path) => {
 
 .page {
     width: 50%;
-    height: 50%;
     background-color: #1B1D1F;
     border-radius: 10px;
     z-index: 1000;

@@ -8,9 +8,7 @@ defineProps({
 </script>
 <template>
     <div class="card">
-        <div class="trumb-img">
             <slot></slot>
-        </div>
         <div class="title">{{ title }}</div>
     </div>
 </template>
@@ -21,15 +19,12 @@ defineProps({
     margin: 20px;
     height: 210px;
     border: #1B1D1F 1px solid;
+    border-radius: 10px;
 }
 
 .card:hover{
     cursor: pointer;
     border: #BEE3CC 1px solid;
-}
-
-.trumb-img {
-    border-radius: 10px;
 }
 
 .title {

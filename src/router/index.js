@@ -9,7 +9,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: Home
+      component: Country
     },
     {
       path: '/views',

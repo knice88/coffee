@@ -252,8 +252,19 @@ const filteredList = computed(() => {
 .main-area {
     display: flex;
     margin: 10px 50px;
-    height: calc(100% - 100px);
     overflow: hidden;
+}
+
+@media screen and (max-width: 1024px) {
+    .main-area {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+    }
+    .main-list {
+        width: 100%;
+    }
 }
 
 .search-input {

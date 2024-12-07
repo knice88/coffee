@@ -16,7 +16,7 @@ import Card from './Card.vue'
                     <img src="@/assets/translate.png" class="trumb-img">
                 </Card>
                 <Card @click="$router.push('/views/country')" title="Country">
-                    <img src="@/assets/translate.png" class="trumb-img"> <!-- todo 占位，完成后再修改 -->
+                    <img src="@/assets/country.png" class="trumb-img">
                 </Card>
             </div>
         </div>

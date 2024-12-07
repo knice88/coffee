@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
 import SidebarItem from './SidebarItem.vue';
 const expandMenu = ref(false);
 const sortList = ['Population', 'Name', 'Region'];
@@ -30,6 +30,60 @@ const handleStatusClick = (item) => {
         activeStatus.value[item] = true
     }
 }
+const countryList = ref([])
+onMounted(() => {
+    fetch('https://restcountries.com/v3.1/all')
+        .then(response => response.json())
+        .then(data => {
+            countryList.value = data
+        })
+        .catch(error => {
+            console.log(error)
+        })
+})
+const beautifyNum = (num) => {
+    // 千分位分隔
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+}
+const searchKey = ref('')
+
+// 根据不同的筛选条件，改变列表顺序
+const filteredList = computed(() => {
+    let list = countryList.value;
+    if (!list) {
+        return []
+    }
+    if (searchKey.value) {
+        // 搜索
+        const keyword = searchKey.value.toLowerCase()
+        list = list.filter(item => {
+            return item.name.common.toLowerCase().includes(keyword) ||
+                item.region.toLowerCase().includes(keyword) ||
+                (item.subregion ? item.subregion.toLowerCase().includes(keyword) : false)
+        })
+    }
+    if (Object.keys(selectedRegion.value).filter(item => selectedRegion.value[item]).length > 0) {
+        // 筛选区域
+        list = list.filter(item => selectedRegion.value[item.region])
+    }
+    if (activeStatus.value[1]) {
+        // Member of the United Nations
+        list = list.filter(item => item.name.common.includes('United'))
+    }
+    if (activeStatus.value[2]) {
+        // Independent
+        list = list.filter(item => item.independent)
+    }
+    return list.sort((a, b) => {
+        if (sortBy.value === 'Population') {
+            return b.population - a.population
+        } else if (sortBy.value === 'Name') {
+            return a.name.common.localeCompare(b.name.common)
+        } else if (sortBy.value === 'Region') {
+            return a.region.localeCompare(b.region)
+        }
+    })
+})
 </script>
 <template>
     <div class="mask-container">
@@ -38,7 +92,8 @@ const handleStatusClick = (item) => {
             <div class="search-result">Found 234 countries</div>
             <div class="search-box">
                 <img src="@/assets/country/Search.svg" alt="">
-                <input type="text" placeholder="Search by Name, Region, Subregion" class="search-input">
+                <input type="text" placeholder="Search by Name, Region, Subregion" class="search-input"
+                    v-model="searchKey">
             </div>
         </div>
         <!-- 侧边栏，包含排序、区域、状态 -->
@@ -68,21 +123,73 @@ const handleStatusClick = (item) => {
                 <SidebarItem label="Status">
                     <!-- 状态 -->
                     <div class="status-item">
-                        <div class="check-box" @click="handleStatusClick(1)" :class="{ 'check-box-active': activeStatus[1] }"></div>
+                        <div class="check-box" @click="handleStatusClick(1)"
+                            :class="{ 'check-box-active': activeStatus[1] }"></div>
                         Member of the United Nations
                     </div>
                     <div class="status-item">
-                        <div class="check-box" @click="handleStatusClick(2)" :class="{ 'check-box-active': activeStatus[2] }"></div>
+                        <div class="check-box" @click="handleStatusClick(2)"
+                            :class="{ 'check-box-active': activeStatus[2] }"></div>
                         Independent
                     </div>
                 </SidebarItem>
             </div>
             <!-- 列表 -->
+            <div class="main-list">
+                <span class="table-header" style="width: 10%">Flag</span>
+                <span class="table-header" style="width: 22.5%">Name</span>
+                <span class="table-header" style="width: 22.5%">Population</span>
+                <span class="table-header" style="width: 22.5%">Area (km²)</span>
+                <span class="table-header" style="width: 22.5%">Region</span>
+                <hr>
+                <div class="data-container" v-for="item, index in filteredList" :key="index">
+                    <span class="table-data" style="width: 10%">
+                        <img :src="item.flags.png" style="width: 50%;">
+                    </span>
+                    <span class="table-data" style="width: 22.5%">{{ item.name.common }}</span>
+                    <span class="table-data" style="width: 22.5%">{{ beautifyNum(item.population) }}</span>
+                    <span class="table-data" style="width: 22.5%">{{ beautifyNum(item.area) }}</span>
+                    <span class="table-data" style="width: 22.5%">{{ item.region }}</span>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <style scoped>
+.data-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.table-data {
+    display: inline-block;
+    color: #D2D5DA;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.table-header {
+    display: inline-block;
+    color: #6C727F;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.main-list>hr {
+    background-color: #282B30;
+    height: 1px;
+    border: none;
+}
+
+.main-list {
+    width: 85%;
+    margin: 5px 20px 30px 30px;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
 .check-box-active {
     background-color: #4E80EE;
     background-image: url(@/assets/country/Done_round.svg);
@@ -139,12 +246,14 @@ const handleStatusClick = (item) => {
 }
 
 .sidebar {
-    width: 15%;
+    width: 20%;
 }
 
 .main-area {
     display: flex;
     margin: 10px 50px;
+    height: calc(100% - 100px);
+    overflow: hidden;
 }
 
 .search-input {
@@ -186,5 +295,7 @@ const handleStatusClick = (item) => {
 .mask-container {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    height: 100%;
 }
 </style>

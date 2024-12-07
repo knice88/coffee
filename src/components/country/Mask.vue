@@ -137,19 +137,19 @@ const filteredList = computed(() => {
             <!-- 列表 -->
             <div class="main-list">
                 <span class="table-header" style="width: 10%">Flag</span>
-                <span class="table-header" style="width: 22.5%">Name</span>
-                <span class="table-header" style="width: 22.5%">Population</span>
-                <span class="table-header" style="width: 22.5%">Area (km²)</span>
-                <span class="table-header" style="width: 22.5%">Region</span>
+                <span class="table-header flex-item">Name</span>
+                <span class="table-header flex-item">Population</span>
+                <span class="table-header flex-item">Area (km²)</span>
+                <span class="table-header hidden-header">Region</span>
                 <hr>
                 <div class="data-container" v-for="item, index in filteredList" :key="index">
                     <span class="table-data" style="width: 10%">
                         <img :src="item.flags.png" style="width: 50%;">
                     </span>
-                    <span class="table-data" style="width: 22.5%">{{ item.name.common }}</span>
-                    <span class="table-data" style="width: 22.5%">{{ beautifyNum(item.population) }}</span>
-                    <span class="table-data" style="width: 22.5%">{{ beautifyNum(item.area) }}</span>
-                    <span class="table-data" style="width: 22.5%">{{ item.region }}</span>
+                    <span class="table-data flex-item">{{ item.name.common }}</span>
+                    <span class="table-data flex-item">{{ beautifyNum(item.population) }}</span>
+                    <span class="table-data flex-item">{{ beautifyNum(item.area) }}</span>
+                    <span class="table-data hidden-header">{{ item.region }}</span>
                 </div>
             </div>
         </div>
@@ -168,6 +168,7 @@ const filteredList = computed(() => {
     color: #D2D5DA;
     font-size: 16px;
     margin: 10px 0;
+    width: 22.5%;
 }
 
 .table-header {
@@ -175,6 +176,7 @@ const filteredList = computed(() => {
     color: #6C727F;
     font-size: 12px;
     margin-bottom: 10px;
+    width: 22.5%;
 }
 
 .main-list>hr {
@@ -266,6 +268,16 @@ const filteredList = computed(() => {
 
     .main-list {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    .hidden-header {
+        display: none;
+    }
+
+    .flex-item {
+        width: 30%;
     }
 }
 

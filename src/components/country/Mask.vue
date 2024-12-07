@@ -89,7 +89,7 @@ const filteredList = computed(() => {
     <div class="mask-container">
         <!-- 顶部导航栏，包含查找结果、搜索框 -->
         <div class="header">
-            <div class="search-result">Found 234 countries</div>
+            <div class="search-result">Found {{ filteredList.length }} countries</div>
             <div class="search-box">
                 <img src="@/assets/country/Search.svg" alt="">
                 <input type="text" placeholder="Search by Name, Region, Subregion" class="search-input"
@@ -259,9 +259,11 @@ const filteredList = computed(() => {
     .main-area {
         flex-direction: column;
     }
+
     .sidebar {
         width: 100%;
     }
+
     .main-list {
         width: 100%;
     }
@@ -298,8 +300,7 @@ const filteredList = computed(() => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
-    margin: 0 50px;
+    margin: 20px 50px;
     color: #6C727F;
 }
 

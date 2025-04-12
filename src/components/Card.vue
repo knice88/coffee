@@ -17,14 +17,9 @@ defineProps({
 .card {
     width: 100%;
     margin: 20px;
-    height: 210px;
+    max-height: 100%;
     border: #1B1D1F 1px solid;
     border-radius: 10px;
-}
-
-.card:hover{
-    cursor: pointer;
-    border: #BEE3CC 1px solid;
 }
 
 .title {

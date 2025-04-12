@@ -46,15 +46,20 @@ import Card from './Card.vue'
 }
 
 .trumb-img {
-    width: 100%;
+    max-width: 100%;
     border-radius: 10px;
+}
+
+.trumb-img:hover {
+    cursor: pointer;
+    border: #BEE3CC 1px solid;
 }
 
 .home {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background-image: url(@/assets/bg.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -62,6 +67,7 @@ import Card from './Card.vue'
 
 .page {
     width: 50%;
+    min-width: 300px;
     background-color: #1B1D1F;
     border-radius: 10px;
     z-index: 1000;

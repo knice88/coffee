@@ -1,13 +1,10 @@
-<script setup>
-import Mask from './Mask.vue'
-</script>
 <template>
     <div class="container">
         <div class="container-img">
             <img src="@/assets/country/Logo.svg">
         </div>
         <div class="mask">
-            <Mask />
+            <RouterView />
         </div>
     </div>
 </template>
@@ -33,7 +30,7 @@ import Mask from './Mask.vue'
     /* 方向为垂直 */
 }
 
-.container-img{
+.container-img {
     height: 25%;
     display: flex;
     justify-content: center;
@@ -44,8 +41,8 @@ import Mask from './Mask.vue'
 
 .mask {
     height: 75%;
-    width: 90%;
-    margin-bottom: 5%;
+    width: 80%;
+    margin-bottom: 3%;
     background-color: #1B1D1F;
     border-radius: 10px;
 }
@@ -56,5 +53,4 @@ import Mask from './Mask.vue'
         border-radius: 0;
     }
 }
-
 </style>

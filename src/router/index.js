@@ -3,6 +3,8 @@ import Home from '@/components/Home.vue'
 import Coffee from '@/components/coffee/Main.vue'
 import Translate from '@/components/translate/Main.vue'
 import Country from '@/components/country/Main.vue'
+import CountryList from '@/components/country/List.vue'
+import CountryInfo from '@/components/country/Info.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -24,7 +26,17 @@ const router = createRouter({
         },
         {
           path: 'country',
-          component: Country
+          component: Country,
+          children: [
+            {
+              path: '',
+              component: CountryList,
+            },
+            {
+              path: 'info/:code',
+              component: CountryInfo
+            }
+          ]
         }
       ]
     }

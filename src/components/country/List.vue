@@ -142,7 +142,8 @@ const filteredList = computed(() => {
                 <span class="table-header flex-item">Area (km²)</span>
                 <span class="table-header hidden-header">Region</span>
                 <hr>
-                <div class="data-container" v-for="item, index in filteredList" :key="index">
+                <div class="data-container" v-for="item, index in filteredList" :key="index"
+                    @click="$router.push('/views/country/info/' + item.ccn3)">
                     <span class="table-data" style="width: 10%">
                         <img :src="item.flags.png" style="width: 50%;">
                     </span>
@@ -190,6 +191,7 @@ const filteredList = computed(() => {
     margin: 5px 20px 30px 30px;
     overflow-y: scroll;
     scrollbar-width: none;
+    min-height: 800px;
 }
 
 .check-box-active {
@@ -314,6 +316,7 @@ const filteredList = computed(() => {
     align-items: center;
     margin: 20px 50px;
     color: #6C727F;
+    height: 10%;
 }
 
 .mask-container {

@@ -66,13 +66,12 @@ import Card from './Card.vue'
 }
 
 .page {
-    width: 50%;
     min-width: 300px;
     background-color: #1B1D1F;
     border-radius: 10px;
-    z-index: 1000;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 5% 25%;
 }
 </style>

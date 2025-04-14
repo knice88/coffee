@@ -5,6 +5,9 @@ import Translate from '@/components/translate/Main.vue'
 import Country from '@/components/country/Main.vue'
 import CountryList from '@/components/country/List.vue'
 import CountryInfo from '@/components/country/Info.vue'
+import Quiz from '@/components/quiz/Main.vue'
+import Answer from '@/components/quiz/Answer.vue'
+import QuizResult from '@/components/quiz/Result.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -35,6 +38,20 @@ const router = createRouter({
             {
               path: 'info/:code',
               component: CountryInfo
+            }
+          ]
+        },
+        {
+          path: 'quiz',
+          component: Quiz,
+          children: [
+            {
+              path: '',
+              component: Answer,
+            },
+            {
+              path: 'result/:points',
+              component: QuizResult
             }
           ]
         }

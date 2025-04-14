@@ -164,6 +164,11 @@ const filteredList = computed(() => {
     align-items: center;
 }
 
+.data-container:hover {
+    background-color: #282B30;
+    cursor: pointer;
+}
+
 .table-data {
     display: inline-block;
     color: #D2D5DA;

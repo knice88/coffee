@@ -33,7 +33,7 @@ import Card from './Card.vue'
 .cards {
     width: 90%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-row-gap: 20px;
     grid-column-gap: 20px;
     justify-items: center;

@@ -15,8 +15,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: Home,
-      redirect: '/views/github'
+      component: Home
     },
     {
       path: '/views',

@@ -8,6 +8,7 @@ import CountryInfo from '@/components/country/Info.vue'
 import Quiz from '@/components/quiz/Main.vue'
 import Answer from '@/components/quiz/Answer.vue'
 import QuizResult from '@/components/quiz/Result.vue'
+import Github from '@/components/github/Main.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -54,6 +55,10 @@ const router = createRouter({
               component: QuizResult
             }
           ]
+        },
+        {
+          path: 'github',
+          component: Github
         }
       ]
     }

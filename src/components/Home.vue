@@ -21,6 +21,9 @@ import Card from './Card.vue'
                 <Card @click="$router.push('/views/quiz')" title="Quiz">
                     <img src="@/assets/quiz.png" class="trumb-img">
                 </Card>
+                <Card @click="$router.push('/views/github')" title="Github Profile">
+                    <img src="@/assets/gprofile.png" class="trumb-img">
+                </Card>
             </div>
         </div>
     </div>
